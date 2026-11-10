@@ -29,5 +29,5 @@ jobs:
       - name: Snyk Monitor
         run: npx snyk monitor
         env:
-          SNYK_TOKEN: ${{ snyk_uat.1fcad39e.eyJlIjoxODAyMDYzMTkzLCJoIjoic255ay5pbyIsImoiOiJBYUhEMmdqYmRpenhxNS03T3lhRThRIiwicyI6IldReG14RWJmUnNtV29ETWczTDNZOEEiLCJ0aWQiOiJBQUFBQUFBQUFBQUFBQUFBQUFBQUFBIn0.yqybWNrXckmm1S8HVF5xZlwyJOek254uXlBLh8QGQtZ70jRkGI7zESPjaCpnl1esOrw3XJPiQItPd9bk-x-IDg }}
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         if: github.ref == 'refs/heads/master'
