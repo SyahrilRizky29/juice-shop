@@ -1,0 +1,19 @@
+﻿version: v1.25.0
+ignore:
+  SNYK-JS-MARSDB-480405:
+    '*':
+      reason: 'No upgrade or patch available dari maintainer; pustaka in-memory database ini digunakan khusus untuk simulasi laboratorium'
+      expires: 2026-12-31T23:59:59.000Z
+  SNYK-JS-HTTPCACHESEMANTICS-19964064:
+    - 'sqlite3 > node-gyp > make-fetch-happen > http-cache-semantics':
+        reason: 'Build-time dependency pada node-gyp saat instalasi sqlite3 dan berstatus No upgrade or patch available'
+        expires: 2026-12-31T23:59:59.000Z
+  SNYK-JS-HTTPCACHESEMANTICS-19964068:
+    - 'sqlite3 > node-gyp > make-fetch-happen > http-cache-semantics':
+        reason: 'Build-time dependency pada node-gyp, tidak dieksekusi saat runtime produksi'
+        expires: 2026-12-31T23:59:59.000Z
+  SNYK-JS-URIJS-19963963:
+    - '@cyclonedx/cyclonedx-npm > ajv-formats-draft2019 > uri-js':
+        reason: 'Dev-only dependency untuk utilitas pembuatan SBOM, tidak masuk ke dalam production bundle'
+        expires: 2026-12-31T23:59:59.000Z
+patch: {}
