@@ -1,19 +1,56 @@
-﻿version: v1.25.0
+version: v1.25.0
 ignore:
+  # --- Tidak ada fix dari maintainer ---
   SNYK-JS-MARSDB-480405:
-    '*':
-      reason: 'No upgrade or patch available dari maintainer; pustaka in-memory database ini digunakan khusus untuk simulasi laboratorium'
-      expires: 2026-12-31T23:59:59.000Z
+    - '*':
+        reason: "Tidak ada versi perbaikan. marsdb sengaja dipakai Juice Shop untuk tantangan NoSQL injection, aplikasi hanya dijalankan di lab lokal."
+        expires: 2027-03-31T00:00:00.000Z
+        created: 2026-11-10T00:00:00.000Z
+  SNYK-JS-NOTEVIL-2385946:
+    - '*':
+        reason: "Tidak ada versi perbaikan. notevil sengaja dipakai Juice Shop untuk tantangan sandbox bypass, aplikasi hanya dijalankan di lab lokal."
+        expires: 2027-03-31T00:00:00.000Z
+        created: 2026-11-10T00:00:00.000Z
+  SNYK-JS-HBS-1566555:
+    - '*':
+        reason: "Severity Low dan belum ada versi perbaikan dari maintainer. Risiko diterima untuk lingkungan lab."
+        expires: 2027-03-31T00:00:00.000Z
+        created: 2026-11-10T00:00:00.000Z
   SNYK-JS-HTTPCACHESEMANTICS-19964064:
-    - 'sqlite3 > node-gyp > make-fetch-happen > http-cache-semantics':
-        reason: 'Build-time dependency pada node-gyp saat instalasi sqlite3 dan berstatus No upgrade or patch available'
-        expires: 2026-12-31T23:59:59.000Z
+    - '*':
+        reason: "Tidak ada fix. Dependency transitive sqlite3 > node-gyp > make-fetch-happen, dipakai saat build native module, bukan saat aplikasi berjalan."
+        expires: 2027-03-31T00:00:00.000Z
+        created: 2026-11-10T00:00:00.000Z
   SNYK-JS-HTTPCACHESEMANTICS-19964068:
-    - 'sqlite3 > node-gyp > make-fetch-happen > http-cache-semantics':
-        reason: 'Build-time dependency pada node-gyp, tidak dieksekusi saat runtime produksi'
-        expires: 2026-12-31T23:59:59.000Z
-  SNYK-JS-URIJS-19963963:
-    - '@cyclonedx/cyclonedx-npm > ajv-formats-draft2019 > uri-js':
-        reason: 'Dev-only dependency untuk utilitas pembuatan SBOM, tidak masuk ke dalam production bundle'
-        expires: 2026-12-31T23:59:59.000Z
+    - '*':
+        reason: "Tidak ada fix. Dependency transitive sqlite3 > node-gyp > make-fetch-happen, dipakai saat build native module, bukan saat aplikasi berjalan."
+        expires: 2027-03-31T00:00:00.000Z
+        created: 2026-11-10T00:00:00.000Z
+  SNYK-JS-INFLIGHT-6095116:
+    - '*':
+        reason: "Tidak ada fix. Dependency transitive sqlite3 > node-gyp > glob, hanya terpakai di tahap build. Dampaknya kebocoran memori, bukan eksekusi kode."
+        expires: 2027-03-31T00:00:00.000Z
+        created: 2026-11-10T00:00:00.000Z
+
+  # --- Ada fix, tapi hanya via dependency transitive (coba overrides dulu) ---
+  SNYK-JS-BASICFTP-20419408:
+    - '*':
+        reason: "Fix tersedia hanya di versi mayor baru dan dependency induknya belum memakainya. Fitur FTP tidak dipakai aplikasi."
+        expires: 2027-03-31T00:00:00.000Z
+        created: 2026-11-10T00:00:00.000Z
+  SNYK-JS-MINIMATCH-22111072:
+    - '*':
+        reason: "Fix ada di versi 11.x, lompatan mayor yang tidak kompatibel dengan glob@7 di jalur sqlite3 > node-gyp. Hanya terpakai saat build."
+        expires: 2027-03-31T00:00:00.000Z
+        created: 2026-11-10T00:00:00.000Z
+  SNYK-JS-TOOTALLNATEONCE-15250612:
+    - '*':
+        reason: "Fix ada di 2.0.1 dan 3.0.1, tapi dependency induk (http-proxy-agent@4) belum memakainya. Jalur hanya di tahap build sqlite3."
+        expires: 2027-03-31T00:00:00.000Z
+        created: 2026-11-10T00:00:00.000Z
+  SNYK-JS-UUID-16133035:
+    - '*':
+        reason: "Fix ada di uuid 11.1.1 ke atas, tapi sequelize@6 masih memakai uuid@8. Upgrade paksa berisiko merusak kompatibilitas."
+        expires: 2027-03-31T00:00:00.000Z
+        created: 2026-11-10T00:00:00.000Z
 patch: {}
