@@ -1,33 +1,33 @@
 ﻿name: DevSecOps Snyk SCA
 on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main]
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
 jobs:
-  snyk-scan:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  snyk-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
 
-      - name: Install Dependencies
-        run: npm ci
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps
 
-      - name: Snyk SCA Scan
-        uses: snyk/actions/node@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --severity-threshold=high
+      - name: Snyk SCA Scan
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
 
-      - name: Snyk Monitor
-        run: npx snyk monitor
-        env:
-          SNYK_TOKEN: ${{ snyk_uat.1fcad39e.eyJlIjoxODAyMDYzMTkzLCJoIjoic255ay5pbyIsImoiOiJBYUhEMmdqYmRpenhxNS03T3lhRThRIiwicyI6IldReG14RWJmUnNtV29ETWczTDNZOEEiLCJ0aWQiOiJBQUFBQUFBQUFBQUFBQUFBQUFBQUFBIn0.yqybWNrXckmm1S8HVF5xZlwyJOek254uXlBLh8QGQtZ70jRkGI7zESPjaCpnl1esOrw3XJPiQItPd9bk-x-IDg }}
-        if: github.ref == 'refs/heads/main'
+      - name: Snyk Monitor
+        run: npx snyk monitor
+        env:
+          SNYK_TOKEN: ${{ snyk_uat.1fcad39e.eyJlIjoxODAyMDYzMTkzLCJoIjoic255ay5pbyIsImoiOiJBYUhEMmdqYmRpenhxNS03T3lhRThRIiwicyI6IldReG14RWJmUnNtV29ETWczTDNZOEEiLCJ0aWQiOiJBQUFBQUFBQUFBQUFBQUFBQUFBQUFBIn0.yqybWNrXckmm1S8HVF5xZlwyJOek254uXlBLh8QGQtZ70jRkGI7zESPjaCpnl1esOrw3XJPiQItPd9bk-x-IDg }}
+        if: github.ref == 'refs/heads/master'
